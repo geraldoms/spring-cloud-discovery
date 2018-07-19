@@ -1,1 +1,2 @@
-# spring-cloud-discovery-server
+# Spring Cloud Discovery
+=======================
