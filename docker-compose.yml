@@ -1,0 +1,44 @@
+version: '2.1'
+services:
+  discovery-server:
+    build: ./discovery-server
+    ports:
+      - 8761:8761
+  service-a:
+    build: ./service
+    ports:
+      - 8081:8081
+    links:
+      - discovery-server
+    environment:
+      - service.instance.name=INSTANCE A
+    depends_on:
+      discovery-server:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail -s http://localhost:8081/actuator/health || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+  service-b:
+    build: ./service
+    ports:
+      - 8082:8081
+    links:
+      - discovery-server
+    environment:
+      - service.instance.name=INSTANCE B
+    depends_on:
+      discovery-server:
+        condition: service_healthy
+  client:
+    build: ./client
+    depends_on:
+      - discovery-server
+    ports:
+        - 8080:8080
+    links:
+      - discovery-server
+    depends_on:
+      service-a:
+        condition: service_healthy

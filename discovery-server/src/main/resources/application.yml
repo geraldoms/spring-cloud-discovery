@@ -9,3 +9,7 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+
+endpoints:
+  health:
+    sensitive: false
