@@ -1,11 +1,6 @@
 package com.springcloud.client.controller;
 
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -14,21 +9,14 @@ import org.springframework.web.client.RestTemplate;
 public class MainController {
 
     @Autowired
-    private EurekaClient eurekaClient;
-
-    @Autowired
-    private RestTemplateBuilder templateBuilder;
+    private RestTemplate restTemplate;
 
     @GetMapping("/services")
     public String callService() {
 
-        final RestTemplate restTemplate = templateBuilder.build();
-        final InstanceInfo instanceInfo = eurekaClient.getNextServerFromEureka("service", false);
-        final String baseUrl = instanceInfo.getHomePageUrl();
+        return restTemplate.getForEntity("http://service/message", String.class)
+                           .getBody();
 
-        ResponseEntity<String> response =
-            restTemplate.exchange(baseUrl + "message", HttpMethod.GET, null, String.class);
-        return response.getBody();
     }
 
 }

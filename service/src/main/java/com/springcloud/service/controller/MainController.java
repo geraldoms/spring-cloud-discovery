@@ -11,7 +11,8 @@ public class MainController {
     private String instance;
 
     @GetMapping("/message")
-    public String message(){
-        return "This is the service: " + instance;
+    public String message() {
+
+        return "This is the service: " + instance + ".";
     }
 }

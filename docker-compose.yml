@@ -31,6 +31,17 @@ services:
     depends_on:
       discovery-server:
         condition: service_healthy
+  service-c:
+      build: ./service
+      ports:
+        - 8083:8081
+      links:
+        - discovery-server
+      environment:
+        - service.instance.name=INSTANCE C
+      depends_on:
+        discovery-server:
+          condition: service_healthy
   client:
     build: ./client
     depends_on:
