@@ -6,7 +6,7 @@ This is a very basic example using Eureka Service Discovery from Spring Cloud in
 It has basically three modules:
 
 * [Client module](https://github.com/geraldoms/spring-cloud-discovery/tree/master/client): 
- This module contains a simple client to access the service through the service discovery.
+ This module contains a simple client using Netflix Ribbon in a round-robin fashion to access the service through the service discovery.
  
 * [Discovery-server module](https://github.com/geraldoms/spring-cloud-discovery/tree/master/discovery-server):
 This module contains the service discovery to keep the info to access the services.
@@ -20,7 +20,7 @@ register into the Discovery-server and it will be ready to receive calls from th
 To see the registered instances on Eureka access `http://localhost:8761`. A basic flow of the application is shown in the figure below.
 
 <p align="center">
-  <img width="460" height="500" src="https://user-images.githubusercontent.com/13106549/43022852-a8b49178-8c36-11e8-9b0b-b409db997efc.png">
+  <img width="460" height="500" src="https://user-images.githubusercontent.com/13106549/43099809-5023010e-8e91-11e8-935c-4a9962f6a39e.png">
 </p>
 
 ## Requirements
@@ -47,7 +47,7 @@ To stop all containers, you need to run:
 
 ## Request samples
 
-Since it's using the `getNextServerFromEureka`, the next server will be picked on a round-robin fashion. 
+The client is using the Netflix Ribbon for Load Balancing in a round-robin fashion. 
 
 Request:
 ```bash
