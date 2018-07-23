@@ -20,7 +20,7 @@ register into the Discovery-server and it will be ready to receive calls from th
 To see the registered instances on Eureka access `http://localhost:8761`. A basic flow of the application is shown in the figure below.
 
 <p align="center">
-  <img width="460" height="500" src="https://user-images.githubusercontent.com/13106549/43099809-5023010e-8e91-11e8-935c-4a9962f6a39e.png">
+  <img width="500" height="400" src="https://user-images.githubusercontent.com/13106549/43099809-5023010e-8e91-11e8-935c-4a9962f6a39e.png">
 </p>
 
 ## Requirements
